@@ -1,0 +1,29 @@
+# Python缓存文件
+__pycache__/        # 忽略所有Python缓存文件夹
+**/__pycache__/
+*.py[cod]           # 忽略.pyc, .pyo, .pyd等编译后的Python文件
+
+# 虚拟环境
+venv/               # 忽略Python虚拟环境文件夹
+.env/               # 忽略环境配置文件夹
+
+# 模型权重
+*.pth               # 忽略PyTorch模型权重文件
+*.weights           # 忽略其他格式的模型权重文件
+
+# 日志和数据库
+*.log               # 忽略所有日志文件
+*.sqlite            # 忽略SQLite数据库文件
+
+# IDE配置
+.vscode/            # 忽略VSCode配置文件夹
+.idea/              # 忽略PyCharm配置文件夹
+
+# 大文件和数据
+*.csv               # 忽略CSV文件
+*.zip               # 忽略压缩文件
+
+# 注释文件
+results/
+data/
+data_save/vit/
