@@ -1,6 +1,7 @@
 # A Generic DOA deep learning framework v1
 
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.1.2%2Bcu118-red.svg)](https://pytorch.org/)    [![DOI](https://img.shields.io/badge/DOI-10.xxxx/xxxxx-blue)](https://doi.org/10.xxxx/xxxxx)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1%2Bcu118-red.svg)](https://pytorch.org/)    [![DOI](https://img.shields.io/badge/DOI-10.xxxx/xxxxx-blue)](https://doi.org/10.xxxx/xxxxx) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 
 Most importantly, our code incorporates a universal deep learning framework for DOA estimation, capable of efficiently generating simulation data based on Uniform Linear Array (ULA), Uniform Circular Array (UCA), and other array configurations. It enables the effective extraction of raw data $y_t$, as well as the corresponding sampled covariance matrix (SCM), ideal covariance matrix, signal subspace $U_s$, target DOA values, and the spatial spectrum (SP) associated with the DOA. These data components are utilized to construct comprehensive datasets, which can be leveraged to train deep neural networks for both direct and indirect DOA estimation.
 
@@ -15,7 +16,7 @@ Due to the lower computational efficiency of Python in numerical operations comp
 
 Once the dataset has been successfully generated, various deep neural networks can be efficiently designed and their performance tested. In the domain of DOA estimation, there is an expectation to design networks capable of achieving more accurate DOA estimation across diverse configurations.
 
-2.Additionally, to compare the performance of different algorithms, we have implemented subspace-based algorithms such as MUSIC, Root MUSIC, ESPRIT, and Unity ESPRIT, as well as compressed sensing algorithms like $\ell_1$-SVD, and deep learning-based algorithms such as SPE-CNN within our code framework.
+2.Additionally, to compare the performance of different algorithms, we have implemented subspace-based algorithms such as MUSIC, Root MUSIC, ESPRIT, and Unity ESPRIT, as well as compressed sensing algorithms like $\ell_1$-SVD and SPICE, and deep learning-based algorithms such as SPE-CNN, ASL and Learning-SPICE within our code framework.
 
 3.Furthermore, this repository includes the implementation of the methods presented in the paper [文章标题](文章的URL).The significant contributions of our work can be outlined as follows.
 
@@ -24,8 +25,6 @@ Once the dataset has been successfully generated, various deep neural networks c
 * Via extensive simulation, we compare the proposed method with existing approaches across multiple evaluation metrics and demonstrate the superiority of our method in terms of DOA estimation accuracy and robustness.
 
 All codes for simulation and plotting for results presented in the paper are available in this repository. We encourage the use of this code and look forward to further improvements and contributions.
-
-
 ## Citation Information
 
 If the code or methods provided in this project have been helpful for your research or work, please cite the following reference:
@@ -39,7 +38,7 @@ If the code or methods provided in this project have been helpful for your resea
 ```bibtex
 @article{zhou2024doa,
   title     = {A Deep Learning-Based Supervised Transfer Learning Framework for DOA Estimation with Array Imperfections},
-  author    = {Zhou, Bo and Xu, Kaijie and Xu, Dan and Xing, Mengdao},
+  author    = {Bo Zhou, Kaijie Xu, Yinghui Quan and Mengdao Xing},
   journal   = {To be determined},
   year      = {2024},
   volume    = {},
@@ -49,32 +48,73 @@ If the code or methods provided in this project have been helpful for your resea
 }
 ```
 
+## Code Usage Notes
+
+**1. Prerequisites** 
+- Ensure you have installed the required dependencies:  
+  ```bash
+  pip install -r requirements.txt
+  ```
+**2. Root Directory Set**
+you need to confirm the root directory is correct. The project root directory needs to be set as the directory for the entire file collection.
+**3. implementation of algorithms**
+This repository contains the implementation of various algorithms, all algorithms are implemented through **Python** and **MATLAB**. Because some algorithms require joint execution of MATLAB and Python, you need to carefully adjust the directory and certain code before running it.
+all test files are in the test/ directory.
+- $\ell_1$-SVD algorithm is implemented in the file **l1_svd.py**, which invokes two files: python_call_l1_SVD_omp_plus.m and python_call_l1_SVD_snap.m. When testing snap variations, you should use python_call_l1_SVD_snap in matlab_l1_svd.predict and comment out python_call_l1_SVD_omp_plus. When testing SNR variations, use python_call_l1_SVD_omp_plus. Otherwise, an error will be triggered.
+- Some of our models, such as *Learning-SPICE* and *ASL-2*, require MATLAB for compressed sensing post-processing. After the deep learning-based pre-processing is completed, the corresponding MATLAB code should be executed to obtain the final results.
+- When running the training or testing scripts, please ensure that the paths for loading models, loading data, and saving results are correct to ensure smooth code execution.
+
+**4. Available Weights**
+All files generated during the execution of our code are uploaded to Google Drive: [URL].
+
+
+If you encounter any other problems, you can submit an issue, and I will try to resolve it.
 ## Description of Files
 
-
 - **data_creater/**  
-  存放数据集文件，包括原始数据、处理后的数据和实验生成的结果。
+The file **data_creater** contains modules for dataset generation and management, primarily consisting of three parts:
+  - `signal_datasets/`: Core modules for data generation, storage, and loading operations
+  - `create_*_data/`: Scripts for generating angle sets under various configurations
+  - `Other Files/`:  Implements additional functionalities
+
+- **article_implement/**  
+  Our implementation of state-of-the-art methods, including *SPE-CNN*, *ASL-2*, *SubspaceNet*, and *Learning-SPICE*.
 
 - **models/**  
-  保存深度学习模型的定义和相关代码。
+  Contains the definitions and related code for deep learning models.
 
 - **utils/**  
-  包含各种脚本文件，用于数据预处理、模型训练和评估。
+  Includes various script files for data preprocessing, model training, and evaluation.
 
 - **train/**  
-  配置文件目录，用于保存训练参数、超参数设置或运行脚本的配置文件。
+  Contains training scripts for training the model under various SNRs and snapshots conditions.
 
 - **test/**  
-  存储训练过程中的日志文件，包括损失值、评估指标和其他调试信息。
+  Contains testing scripts, which evaluate our proposed model and compare it with other algorithms, generating loss curves and various evaluation metrics for visualization.
 
-- **utils/**  
-  工具函数目录，包括通用的辅助函数和模块。
+- **matlab_post_process/**  
+  Contains MATLAB post-processing scripts that require execution in MATLAB.
 
 - **results/**  
-  保存实验生成的结果，例如输出图片、预测值或对比分析图表。
+  Stores the model weights and test results.
+
+- **data/**  
+  Stores various testing datasets.
 
 - **data_save/**  
-  存放项目相关的文档，包括项目说明、使用指南等。
+  Contains plotting scripts and the final aggregated data.
 
-- **transfer learning/**  
-  包含单元测试代码，确保项目中各模块的正确性。
+- **vit_transfer_learning/**  
+  Contains the implementation of our proposed transfer learning algorithms.
+
+- **article implement/**  
+  Our code implements the methods that presented in the paper.
+
+- **requirements.txt**  
+  Lists the dependencies and their required versions for the project.
+
+- **README.md**  
+  Provides an overview of the project, including usage instructions and guidelines.
+
+
+
