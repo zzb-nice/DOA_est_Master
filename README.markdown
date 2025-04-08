@@ -55,8 +55,10 @@ If the code or methods provided in this project have been helpful for your resea
   ```bash
   pip install -r requirements.txt
   ```
+  
 **2. Root Directory Set**
 you need to confirm the root directory is correct. The project root directory needs to be set as the directory for the entire file collection.
+
 **3. implementation of algorithms**
 This repository contains the implementation of various algorithms, all algorithms are implemented through **Python** and **MATLAB**. Because some algorithms require joint execution of MATLAB and Python, you need to carefully adjust the directory and certain code before running it.
 all test files are in the test/ directory.

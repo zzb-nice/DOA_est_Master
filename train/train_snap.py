@@ -128,7 +128,7 @@ def main(args):
             os.makedirs(os.path.join(save_path, '_init_weight'))
         torch.save(model.state_dict(), os.path.join(save_path, '_init_weight', f'_init_weight' + id1 + '.pth'))
 
-        # save the model structure，知道自己跑了啥代码
+        # save the model structure
         model_class_file = os.path.join(save_path, 'model.py')
         with open(model_class_file, 'w') as f:
             f.write(inspect.getsource(model.__class__))

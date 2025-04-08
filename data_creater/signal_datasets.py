@@ -38,31 +38,27 @@ class ULA_dataset:
         self._init_data_lists()
 
     def _init_data_lists(self):
-        """初始化所有数据存储列表"""
-        # 基础数据
-        self.y_t = []  # 接收信号
-        self.x_t = []  # 发射信号
-        self.cx_t = []  # 网格上的稀疏信号
-        self.ori_scm = []  # 原始协方差矩阵
-        self.scm = []  # 归一化concat协方差矩阵
-        self.scm_vec = []  # 向量化协方差矩阵
-        self.scm_vec_include_diag = []  # 包含对角线的向量化协方差矩阵
-
-        # 处理后的数据
-        self.tau_cat_scm = []  # tau时延的协方差矩阵
-        self.ori_truth_scm = []  # 原始真实协方差矩阵
-        self.truth_scm = []  # 归一化真实协方差矩阵
-        self.enhance_truth_scm = []  # 相位增强真实协方差矩阵
-        self.enhance_scm = []  # 相位增强协方差矩阵
-        self.FFT_scm = []  # FFT协方差矩阵
+        self.y_t = []  
+        self.x_t = []  
+        self.cx_t = []  
+        self.ori_scm = []  
+        self.scm = []
+        self.scm_vec = [] 
+        self.scm_vec_include_diag = []
+        self.tau_cat_scm = []  
+        self.ori_truth_scm = []  
+        self.truth_scm = []  
+        self.enhance_truth_scm = []  
+        self.enhance_scm = []  
+        self.FFT_scm = []  
 
         # 目标数据
-        self.doa = []  # 到达角
-        self.subspace = []  # 子空间
-        self.spatial_sp = []  # 空间谱
-        self.num_k = []  # 信源数
-        self.sep_k = []  # 信源间隔
-        self.sep_k_spatial = []  # 空间信源间隔
+        self.doa = []  
+        self.subspace = []  
+        self.spatial_sp = []  
+        self.num_k = []  
+        self.sep_k = []  
+        self.sep_k_spatial = []  
 
     def clear(self):
         """清空所有数据列表"""
