@@ -18,7 +18,7 @@ Once the dataset has been successfully generated, various deep neural networks c
 
 2.Additionally, to compare the performance of different algorithms, we have implemented subspace-based algorithms such as MUSIC, Root MUSIC, ESPRIT, and Unity ESPRIT, as well as compressed sensing algorithms like $\ell_1$-SVD and SPICE, and deep learning-based algorithms such as SPE-CNN, ASL and Learning-SPICE within our code framework.
 
-3.Furthermore, this repository includes the implementation of the methods presented in the paper [文章标题](文章的URL).The significant contributions of our work can be outlined as follows.
+3.Furthermore, this repository includes the implementation of the methods presented in the paper [A Deep Learning-Based Supervised Transfer Learning Framework for DOA Estimation with Array Imperfections](文章的URL). The significant contributions of our work can be outlined as follows.
 
 * We propose a novel DOA estimation model based on Vision Transformer, which demonstrates exceptional performance under challenging conditions, such as low SNR and small snapshot scenarios.
 * Due to the presence of array imperfections, the data distributions of the source and target domains differ significantly, leading to substantial performance degradation when the model is deployed in practical scenarios. To address this issue, we introduce a transfer learning algorithm to align the features between the source and target domains, enhancing the model's performance in practical scenarios.
@@ -67,7 +67,7 @@ all test files are in the test/ directory.
 - When running the training or testing scripts, please ensure that the paths for loading models, loading data, and saving results are correct to ensure smooth code execution.
 
 **4. Available Weights**
-All files generated during the execution of our code are uploaded to Google Drive: [URL].
+All files generated during the execution of our code are uploaded to huggingface: https://huggingface.co/zbb2025/DOA_data_and_results/tree/master.
 
 
 If you encounter any other problems, you can submit an issue, and I will try to resolve it.
