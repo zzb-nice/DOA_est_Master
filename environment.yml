@@ -1,0 +1,12 @@
+name: dl_py3.11
+channels:
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - python=3.11
+  - pytorch-cuda=11.8
+  - pytorch==2.5.1
+  - torchaudio==2.5.1
+  - torchvision==0.20.1
+  - libstdcxx-ng
+prefix: /home/xd/.conda/envs/dl_py3.11

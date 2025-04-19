@@ -51,15 +51,14 @@ If the code or methods provided in this project have been helpful for your resea
 ## Code Usage Notes
 
 **1. Prerequisites** 
-- Ensure you have installed the required dependencies:  
-  ```bash
-  pip install -r requirements.txt
-  ```
+Make sure you have installed the required dependencies which is listed in the `environment.yml` file.
+
+Make sure you have installed MATLAB and Python, along with the tools required to call MATLAB functions from Python. For more details, refer to: [https://ww2.mathworks.cn/help/matlab/matlab_external/install-the-matlab-engine-for-python.html](https://ww2.mathworks.cn/help/matlab/matlab_external/install-the-matlab-engine-for-python.html).
   
 **2. Root Directory Set**
-you need to confirm the root directory is correct. The project root directory needs to be set as the directory for the entire file collection.
+You need to confirm that the root directory is correct. The project root directory should be added to Python's search path to correctly import function packages. Additionally, Python's working directory should be set to the current file directory to ensure correct paths for reading and saving models and data.
 
-For vscode, this can be achieved by adding the following content to `./.vscode/settings.json`:
+These configurations are well set by PyCharm. However, if you're using VSCode or other IDEs, there may be a need for additional settings. For vscode, this can be achieved by adding the following content to `./.vscode/settings.json`:
   ```
   {
   "terminal.integrated.env.windows": {
@@ -71,6 +70,9 @@ For vscode, this can be achieved by adding the following content to `./.vscode/s
   "terminal.integrated.env.osx": {
     "PYTHONPATH": "${workspaceFolder}"
   }
+  "python.terminal.executeInFileDir": true, 
+  "code-runner.fileDirectoryAsCwd": true, 
+  "terminal.integrated.cwd": "${fileDirname}"
 }
   ```
 
@@ -127,7 +129,7 @@ The file **data_creater** contains modules for dataset generation and management
 - **article implement/**  
   Our code implements the methods that presented in the paper.
 
-- **requirements.txt**  
+- **environment.yml**  
   Lists the dependencies and their required versions for the project.
 
 - **README.md**  
