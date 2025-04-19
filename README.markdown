@@ -59,6 +59,21 @@ If the code or methods provided in this project have been helpful for your resea
 **2. Root Directory Set**
 you need to confirm the root directory is correct. The project root directory needs to be set as the directory for the entire file collection.
 
+For vscode, this can be achieved by adding the following content to `./.vscode/settings.json`:
+  ```
+  {
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}"
+  },
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "${workspaceFolder}"
+  },
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceFolder}"
+  }
+}
+  ```
+
 **3. implementation of algorithms**
 This repository contains the implementation of various algorithms, all algorithms are implemented through **Python** and **MATLAB**. Because some algorithms require joint execution of MATLAB and Python, you need to carefully adjust the directory and certain code before running it.
 all test files are in the test/ directory.
