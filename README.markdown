@@ -58,7 +58,7 @@ Make sure you have installed MATLAB and Python, along with the tools required to
 **2. Root Directory Set**
 You need to confirm that the root directory is correct. The project root directory should be added to Python's search path to correctly import function packages. Additionally, Python's working directory should be set to the current file directory to ensure correct paths for reading and saving models and data.
 
-These configurations are well set by PyCharm. However, if you're using VSCode or other IDEs, there may be a need for additional settings. For vscode, this can be achieved by adding the following content to `./.vscode/settings.json`:
+These configurations are well set by PyCharm. However, if you're using VSCode or other IDEs, there may be a need for additional settings. For vscode, this may can be achieved by adding the following content to `./.vscode/settings.json`:
   ```
   {
   "terminal.integrated.env.windows": {
