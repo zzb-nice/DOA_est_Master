@@ -30,7 +30,7 @@ All codes for simulation and plotting for results presented in the paper are ava
 If the code or methods provided in this project have been helpful for your research or work, please cite the following reference:
 
 > **A Deep Learning-Based Supervised Transfer Learning Framework for DOA Estimation with Array Imperfections**  
-> Authors: Bo Zhou, Kaijie Xu, Dan Xu, Mengdao Xing  
+> Authors: Bo Zhou, Kaijie Xu, Yinghui Quan, Mengdao Xing  
 > Journal/Conference: To be determined  
 > DOI: To be determined
 
