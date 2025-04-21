@@ -225,63 +225,63 @@ def main(args):
                 if repeat_i == 0:
                     contrast_model_result['SPE-CNN'][step_1] = cnn_predict_result
 
-        RMSE_mean = np.mean(RMSE, axis=-1)
-        RMSE_std = np.std(RMSE, axis=-1)
-        succ_ratio_mean = np.mean(succ_ratio, axis=-1)
+    RMSE_mean = np.mean(RMSE, axis=-1)
+    RMSE_std = np.std(RMSE, axis=-1)
+    succ_ratio_mean = np.mean(succ_ratio, axis=-1)
 
-        print(RMSE_mean)
-        print(f'success ratio of algorithm is {succ_ratio_mean}')
-        print(f'MUSIC success ratio: {np.mean(contrast_succ_ratio["MUSIC"],axis=-1)}')
+    print(RMSE_mean)
+    print(f'success ratio of algorithm is {succ_ratio_mean}')
+    print(f'MUSIC success ratio: {np.mean(contrast_succ_ratio["MUSIC"],axis=-1)}')
 
-        # save loss
-        random_name = str(np.random.rand(1))
-        save_array(RMSE_mean, os.path.join(save_path, 'RMSE_mean_' + random_name + '.csv'),
-                   index=['snr_' + str(args.snr)],
-                   header=['snap_' + str(i) for i in args.snaps])
-        save_array(RMSE_std, os.path.join(save_path, 'RMSE_std_' + random_name + '.csv'),
-                   index=['snr_' + str(args.snr)],
-                   header=['snap_' + str(i) for i in args.snaps])
-        save_array(succ_ratio_mean, os.path.join(save_path, 'succ_ratio_mean_' + random_name + '.csv'),
-                   index=['snr_' + str(args.snr)],
-                   header=['snap_' + str(i) for i in args.snaps])
-        # plot loss
-        loss_1d_plot(RMSE_mean, model_name, args.snaps, 'snap', False,
-                     os.path.join(save_path, f'result_{args.snaps}_{random_name}.png'))
-        # save model loss
-        if not os.path.exists(os.path.join(save_path, 'contrast_model')):
-            os.makedirs(os.path.join(save_path, 'contrast_model'))
-        for name, rmse in contrast_loss.items():
-            rmse_mean = np.mean(rmse, axis=-1)
-            save_array(rmse_mean, os.path.join(save_path, 'contrast_model', name + '_rmse_' + random_name + '.csv'),
-                       index=['snr_' + str(args.snr)],
-                       header=['snap_' + str(i) for i in args.snaps])
+    # save loss
+    random_name = str(np.random.rand(1))
+    save_array(RMSE_mean, os.path.join(save_path, 'RMSE_mean_' + random_name + '.csv'),
+                index=['snr_' + str(args.snr)],
+                header=['snap_' + str(i) for i in args.snaps])
+    save_array(RMSE_std, os.path.join(save_path, 'RMSE_std_' + random_name + '.csv'),
+                index=['snr_' + str(args.snr)],
+                header=['snap_' + str(i) for i in args.snaps])
+    save_array(succ_ratio_mean, os.path.join(save_path, 'succ_ratio_mean_' + random_name + '.csv'),
+                index=['snr_' + str(args.snr)],
+                header=['snap_' + str(i) for i in args.snaps])
+    # plot loss
+    loss_1d_plot(RMSE_mean, model_name, args.snaps, 'snap', False,
+                    os.path.join(save_path, f'result_{args.snaps}_{random_name}.png'))
+    # save model loss
+    if not os.path.exists(os.path.join(save_path, 'contrast_model')):
+        os.makedirs(os.path.join(save_path, 'contrast_model'))
+    for name, rmse in contrast_loss.items():
+        rmse_mean = np.mean(rmse, axis=-1)
+        save_array(rmse_mean, os.path.join(save_path, 'contrast_model', name + '_rmse_' + random_name + '.csv'),
+                    index=['snr_' + str(args.snr)],
+                    header=['snap_' + str(i) for i in args.snaps])
 
-        contrast_loss_mean = {key: np.mean(value, axis=-1) for key, value in contrast_loss.items()}
-        loss_1d_v_plot(RMSE_mean, model_name, args.snaps, 'snap', contrast_loss_mean, False,
-                       os.path.join(save_path, f'contrast_RMSE_{random_name}.png'))
-        contrast_succ_mean = {key: np.mean(value, axis=-1) for key, value in contrast_succ_ratio.items()}
-        succ_1d_v_plot(succ_ratio_mean, model_name, args.snaps, 'snap', contrast_succ_mean, False,
-                       os.path.join(save_path, f'contrast_succ_{random_name}.png'))
+    contrast_loss_mean = {key: np.mean(value, axis=-1) for key, value in contrast_loss.items()}
+    loss_1d_v_plot(RMSE_mean, model_name, args.snaps, 'snap', contrast_loss_mean, False,
+                    os.path.join(save_path, f'contrast_RMSE_{random_name}.png'))
+    contrast_succ_mean = {key: np.mean(value, axis=-1) for key, value in contrast_succ_ratio.items()}
+    succ_1d_v_plot(succ_ratio_mean, model_name, args.snaps, 'snap', contrast_succ_mean, False,
+                    os.path.join(save_path, f'contrast_succ_{random_name}.png'))
 
-        # plot predict
-        plot_predict = False
-        if plot_predict:
-            for i, snap in enumerate(args.snaps):
-                contrast_plot = {key: value[i] for key, value in contrast_model_result.items()}
-                plot_doa_error(theta_set, predict_results[i], contrast_plot,
-                               os.path.join(save_path, f'pre_result_snap_{snap}_{random_name}.png'))
+    # plot predict
+    plot_predict = False
+    if plot_predict:
+        for i, snap in enumerate(args.snaps):
+            contrast_plot = {key: value[i] for key, value in contrast_model_result.items()}
+            plot_doa_error(theta_set, predict_results[i], contrast_plot,
+                            os.path.join(save_path, f'pre_result_snap_{snap}_{random_name}.png'))
 
-        plot_cdf = False
-        if plot_cdf:
-            for i, snap in enumerate(args.snaps):
-                contrast_plot = {key: value[i] for key, value in contrast_model_result.items()}
-                plot_v_cdf(theta_set, predict_results[i], contrast_plot,
-                           os.path.join(save_path, f'pre_cdf_snap_{snap}_{random_name}.png'))
-                model_quantile, contrast_quantile, model_cal_percent, contrast_cal_percent = \
-                    calculate_cdf_and_quantiles(theta_set, predict_results[i], contrast_plot, quantiles=[80],
-                                                cal_percent=[10])
-                print(f'condition {i}', model_quantile, contrast_quantile, model_cal_percent, contrast_cal_percent,
-                      sep='\n')
+    plot_cdf = False
+    if plot_cdf:
+        for i, snap in enumerate(args.snaps):
+            contrast_plot = {key: value[i] for key, value in contrast_model_result.items()}
+            plot_v_cdf(theta_set, predict_results[i], contrast_plot,
+                        os.path.join(save_path, f'pre_cdf_snap_{snap}_{random_name}.png'))
+            model_quantile, contrast_quantile, model_cal_percent, contrast_cal_percent = \
+                calculate_cdf_and_quantiles(theta_set, predict_results[i], contrast_plot, quantiles=[80],
+                                            cal_percent=[10])
+            print(f'condition {i}', model_quantile, contrast_quantile, model_cal_percent, contrast_cal_percent,
+                    sep='\n')
 
 
 def save_args(argparser, file):
